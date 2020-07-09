@@ -41,16 +41,17 @@ app.post('/signin', function(request, response) {
     }
   
     // SELECT a la tabla de productos con WHERE idUsuario
-    con.query("SELECT * FROM usuarios WHERE mailUsuario = ? AND pwUsuario = ?", [usuario.user,usuario.password], function (err, result) {
+    con.query("SELECT * FROM usuarios WHERE mailUsuario = ?", [usuario.user], function (err, result) {
       if (err) throw err;
-  
-      if (result.length == 0) {
-        return response.send("El Usuario o Password son incorrectos");
-      } else {
-        return response.send("Usuario logueado satisfactoriamente");
-      }
       
-      // Devuelvo resultado del select
-      //response.send(result);
+      //Validación del usuario
+      //if (result.length == 0) {
+      //  return response.send("El Usuario o Password son incorrectos");
+      //} else {
+      //  return response.send("Usuario logueado satisfactoriamente");
+      //}
+      
+      //Devuelvo resultado del select
+      response.send(result);
     });
   });
