@@ -14,6 +14,14 @@ $("form").submit(function(e){
         success: function(response) {
             $("#feedback").removeClass('invisible');
             $("#feedback").html(response);  
+
+            if (response == "Usuario logueado satisfactoriamente"){
+                $("#feedback").removeClass('badge badge-danger');
+                $("#feedback").addClass('badge badge-success');
+            } else {
+                $("#feedback").removeClass('badge badge-success');
+                $("#feedback").addClass('badge badge-danger');
+            }
             
             console.log(response);
         }, 
