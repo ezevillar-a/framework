@@ -40,18 +40,18 @@ app.post('/signin', function(request, response) {
       return response.send("El email y password del usuario no puede ser vacio");
     }
   
-    // SELECT a la tabla de productos con WHERE idUsuario
+    // Consulta SQL
     con.query("SELECT * FROM usuarios WHERE mailUsuario = ?", [usuario.user], function (err, result) {
       if (err) throw err;
       
       //Validación del usuario
-      //if (result.length == 0) {
-      //  return response.send("El Usuario o Password son incorrectos");
-      //} else {
-      //  return response.send("Usuario logueado satisfactoriamente");
-      //}
+      if (result[0].pwUsuario == usuario.password) {
+        return response.send("Usuario logueado satisfactoriamente");
+      } else {
+        return response.send("El Usuario o Password son incorrectos");
+      }
       
       //Devuelvo resultado del select
-      response.send(result);
+      //response.send(result);
     });
   });
