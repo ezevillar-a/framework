@@ -46,11 +46,10 @@ app.post('/signin', function(request, response) {
       
       //Validación del usuario
       if (result[0].pwUsuario == usuario.password) {
-        return response.send("Usuario logueado satisfactoriamente");
+        return response.send("Usuario "+ result[0].nombreUsuario +" logueado satisfactoriamente");
       } else {
         return response.send("El Usuario o Password son incorrectos");
       }
-      
       //Devuelvo resultado del select
       //response.send(result);
     });
