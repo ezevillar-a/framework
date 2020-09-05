@@ -51,15 +51,11 @@ app.post('/signin', function(request, response) {
       };   
       //Devuelvo resultado, redirecciono si está OK sino devuelvo el mensaje
       if (loggedIn) {
-        //return response.send("Usuario logeuado");
-        return response.redirect('/main');
+         //response.send('Usuario logueado');
+        //return response.redirect('/main');
       } else {
-        return response.send("El Usuario o Password son incorrectos");
+         //response.send('El Usuario o Password son incorrectos');
       }
-      //response.send(result); 
+      response.send(loggedIn); 
     });
   });
-
-app.get('/main', function(request, response) {
-  response.redirect('http://localhost:3000/main.html');
-});

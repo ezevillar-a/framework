@@ -3,8 +3,8 @@ $("form").submit(function(e){
 
     $.ajax({
         type: "POST",
-        dataType: 'jsonp',
-        useDefaultXhrHeader: false, //Cors important, otherwise its not working
+        dataType: 'json',
+        //useDefaultXhrHeader: false, //Cors important, otherwise its not working
         url: "http://localhost:3005/signin",
         contentType : 'application/json',
         data: JSON.stringify(
@@ -15,16 +15,8 @@ $("form").submit(function(e){
                             ),
         success: function(response) {
             $("#feedback").removeClass('invisible');
-            $("#feedback").html(response);  
-
-            if (response == 'El Usuario o Password son incorrectos'){
-                $("#feedback").removeClass('badge badge-success');
-                $("#feedback").addClass('badge badge-danger');
-            } else {
-                $("#feedback").removeClass('badge badge-danger');
-                $("#feedback").addClass('badge badge-success');
-            }
-    
+            $("#feedback").html(response + "logueado");  
+          
             console.log(response);
         }, 
         error: function() {
