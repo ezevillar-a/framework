@@ -3,6 +3,8 @@ $("form").submit(function(e){
 
     $.ajax({
         type: "POST",
+        dataType: 'jsonp',
+        useDefaultXhrHeader: false, //Cors important, otherwise its not working
         url: "http://localhost:3005/signin",
         contentType : 'application/json',
         data: JSON.stringify(

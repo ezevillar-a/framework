@@ -7,8 +7,8 @@ const { Console } = require('console');
 var app = express();
 app.use(bodyParser.json());
 
-app.options('*', cors()); // include before other routes
 app.use(cors());
+app.options('*', cors()); // preflight OPTIONS; put before other routes
 
 // Conectar con una Base de Datos
 var con = mysql.createConnection({
@@ -39,19 +39,27 @@ app.post('/signin', function(request, response) {
     var usuario = request.body;
     if (!usuario.user || !usuario.password) {
       return response.send("El email y password del usuario no puede ser vacio");
-    }
-  
+    } 
     // Consulta SQL
     con.query("SELECT * FROM usuarios WHERE mailUsuario = ?", [usuario.user], function (err, result) {
       if (err) throw err;
-      
+    
       //Validación del usuario
+      var loggedIn = false;
       if (result[0].pwUsuario == usuario.password) {
-        return response.send("Usuario "+ result[0].nombreUsuario +" logueado satisfactoriamente");
+        loggedIn = true;
+      };   
+      //Devuelvo resultado, redirecciono si está OK sino devuelvo el mensaje
+      if (loggedIn) {
+        //return response.send("Usuario logeuado");
+        return response.redirect('/main');
       } else {
         return response.send("El Usuario o Password son incorrectos");
       }
-      //Devuelvo resultado del select
-      //response.send(result);
+      //response.send(result); 
     });
   });
+
+app.get('/main', function(request, response) {
+  response.redirect('http://localhost:3000/main.html');
+});
