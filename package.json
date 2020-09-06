@@ -17,5 +17,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezevillar-a/framework.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ezevillar-a/framework/issues"
+  },
+  "homepage": "https://github.com/ezevillar-a/framework#readme"
 }
