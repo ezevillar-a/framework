@@ -7,6 +7,9 @@ const publicDirectory = path.join(__dirname, '../public/')
 
 app.use(express.static(publicDirectory))
 
+/*
 app.listen(port, () => {
     console.log('App running!')
 })
+*/
+app.listen(process.env.PORT || 3000);
