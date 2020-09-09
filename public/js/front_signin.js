@@ -14,10 +14,22 @@ $("form").submit(function(e){
                             }
                             ),
         success: function(response) {
-            $("#feedback").removeClass('invisible');
-            $("#feedback").html(response + "logueado");  
-          
             console.log(response);
+            $("#feedback").removeClass('invisible');
+
+            if(response == true) {
+                var usuario = $("#inputEmail").val();
+                $("#feedback").html(usuario + ' se ha logueado');
+                $("#feedback").addClass('text-success');
+                $("#feedback").removeClass('text-danger');
+                $("#inputEmail").val("");
+                $("#inputPassword").val("");
+            } else {
+                $("#feedback").html('Usuario o Password erróneo');
+                $("#feedback").addClass('text-danger');
+                $("#feedback").removeClass('text-success');
+            };
+
         }, 
         error: function() {
             console.log("An error has occured");

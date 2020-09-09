@@ -3,6 +3,8 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 const { Console } = require('console');
+const { isNull, isUndefined } = require('util');
+const { endianness } = require('os');
 
 var app = express();
 app.use(bodyParser.json());
@@ -44,18 +46,18 @@ app.post('/signin', function(request, response) {
     con.query("SELECT * FROM usuarios WHERE mailUsuario = ?", [usuario.user], function (err, result) {
       if (err) throw err;
     
-      //Validación del usuario
-      var loggedIn = false;
-      if (result[0].pwUsuario == usuario.password) {
-        loggedIn = true;
-      };   
-      //Devuelvo resultado, redirecciono si está OK sino devuelvo el mensaje
-      if (loggedIn) {
-         //response.send('Usuario logueado');
-        //return response.redirect('/main');
-      } else {
-         //response.send('El Usuario o Password son incorrectos');
-      }
-      response.send(loggedIn); 
+          //Validación del usuario
+          var loggedIn = false;
+
+          //Existe el usuario
+          if (result.length > 0){
+            
+            //El password está OK?
+            if (result[0].pwUsuario == usuario.password) {
+              loggedIn = true;
+             };  
+
+          };
+          response.send(loggedIn); 
     });
   });
